@@ -1,20 +1,13 @@
-import { Sidebar } from "@/components/layout/Sidebar";
-import { TopicCardSkeletonList } from "@/components/forum/TopicCardSkeleton";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { PageLoader } from "@/components/ui/PageLoader";
 
-// Category landing page loading skeleton. Same shell as the main feed
-// but with a category header placeholder.
+// Category list loading — the previous skeleton painted a bunch of
+// empty rounded rows which looked like a broken list. Now we just
+// show the shared animated loader and let the real list drop in
+// when SSR finishes.
 export default function CategoryLoading() {
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-6">
-      <Sidebar />
-      <section className="min-w-0 flex-1">
-        <div className="mb-4 rounded-lg border border-border bg-card p-4">
-          <Skeleton className="mb-2 h-6 w-32" />
-          <Skeleton className="h-4 w-3/4" />
-        </div>
-        <TopicCardSkeletonList count={5} />
-      </section>
+    <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6">
+      <PageLoader />
     </main>
   );
 }

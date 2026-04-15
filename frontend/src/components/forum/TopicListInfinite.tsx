@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Topic } from "@/types";
 import { TopicCard } from "./TopicCard";
+import { InlineLoader } from "@/components/ui/PageLoader";
 import { adaptTopic } from "@/lib/api/forum-adapter";
 import { listTopics, type ListTopicsParams } from "@/lib/api/forum";
 
@@ -73,23 +74,26 @@ export function TopicListInfinite({
           <TopicCard key={t.id} topic={t} />
         ))}
       </div>
-      <div ref={sentinelRef} className="py-6 text-center text-xs text-muted-foreground">
+      <div ref={sentinelRef} className="flex justify-center text-xs text-muted-foreground">
         {loading ? (
-          <span className="inline-flex items-center gap-2">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
-            加载中…
-          </span>
+          <InlineLoader />
         ) : error ? (
           <button
             type="button"
             onClick={loadMore}
-            className="rounded-md border border-border bg-card px-3 py-1 hover:bg-accent"
+            className="my-6 rounded-md border border-border bg-card px-3 py-1 hover:bg-accent"
           >
             {error}
           </button>
-        ) : done ? (
-          topics.length > 0 ? "— 到底了 —" : null
-        ) : null}
+        ) : done && topics.length > 0 ? (
+          <span className="my-6 inline-flex items-center gap-2 text-muted-foreground/70">
+            <span className="h-px w-8 bg-border" />
+            到底了
+            <span className="h-px w-8 bg-border" />
+          </span>
+        ) : (
+          <span className="py-4" aria-hidden />
+        )}
       </div>
     </>
   );

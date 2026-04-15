@@ -1,31 +1,14 @@
-import { Sidebar } from "@/components/layout/Sidebar";
-import { TopicCardSkeletonList } from "@/components/forum/TopicCardSkeleton";
-import { Skeleton } from "@/components/ui/Skeleton";
-
-// Route-level loading UI for the main forum segment. Next.js renders
-// this automatically while the server component is fetching data, which
-// makes the first paint feel fast even on a cold cache. Mirrors the
-// layout of app/(main)/page.tsx so the hand-off doesn't reflow.
+// Route-level fallback for every page under (main). Kept intentionally
+// minimal — a thin indeterminate progress bar at the top of the viewport
+// — because this file is inherited by *every* child route that doesn't
+// ship its own loading.tsx. An overly specific skeleton here would
+// flash a wrong-shaped placeholder on /topic/:id, /u/:name, /bot,
+// /messages, etc. Routes that want a tailored skeleton (home list,
+// category list, topic detail) provide their own.
 export default function MainLoading() {
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-6">
-      <Sidebar />
-      <section className="min-w-0 flex-1">
-        <div className="mb-4 flex items-center justify-between">
-          <Skeleton className="h-10 w-56" />
-          <Skeleton className="h-9 w-20" />
-        </div>
-        <TopicCardSkeletonList count={5} />
-      </section>
-      <aside className="hidden w-64 shrink-0 xl:block">
-        <div className="sticky top-20 space-y-4">
-          <div className="rounded-lg border border-border bg-card p-4">
-            <Skeleton className="mb-2 h-4 w-24" />
-            <Skeleton className="mb-1 h-3 w-full" />
-            <Skeleton className="h-3 w-5/6" />
-          </div>
-        </div>
-      </aside>
-    </main>
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-0.5 overflow-hidden">
+      <div className="h-full w-1/3 animate-nav-progress rounded-r-full bg-primary/80" />
+    </div>
   );
 }

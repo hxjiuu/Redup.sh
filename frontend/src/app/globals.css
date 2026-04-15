@@ -148,6 +148,62 @@
     animation: redup-shimmer 1.8s ease-in-out infinite;
   }
 
+  /* Top-of-page indeterminate progress bar used by (main)/loading.tsx
+     as a neutral route-transition indicator. Slides a thin bar across
+     the viewport instead of flashing a shape-specific skeleton. */
+  @keyframes redup-nav-progress {
+    0%   { transform: translateX(-100%); }
+    50%  { transform: translateX(120%); }
+    100% { transform: translateX(-100%); }
+  }
+  .animate-nav-progress {
+    animation: redup-nav-progress 1.4s ease-in-out infinite;
+  }
+
+  /* Bouncing loader dots — three dots stagger via animation-delay in
+     the caller. Subtle upward arc + scale so the motion reads as
+     "breathing" rather than a hard bounce. */
+  @keyframes redup-loader-bounce {
+    0%, 80%, 100% {
+      transform: translateY(0) scale(0.9);
+      opacity: 0.55;
+    }
+    40% {
+      transform: translateY(-8px) scale(1);
+      opacity: 1;
+    }
+  }
+  .animate-loader-bounce {
+    animation: redup-loader-bounce 1.2s ease-in-out infinite;
+  }
+
+  /* Soft halo behind the loader dots — pulses its scale and opacity
+     slowly so the background reads as "something is happening" even
+     before the user notices the dots. */
+  @keyframes redup-halo-breathe {
+    0%, 100% {
+      transform: scale(0.85);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.85;
+    }
+  }
+  .animate-halo-breathe {
+    animation: redup-halo-breathe 2.4s ease-in-out infinite;
+  }
+
+  /* Loader label — a subtle fade so the text feels alive without
+     flashing. Slower than the dots so the label doesn't compete. */
+  @keyframes redup-loader-label {
+    0%, 100% { opacity: 0.45; }
+    50%      { opacity: 1; }
+  }
+  .animate-loader-label {
+    animation: redup-loader-label 2s ease-in-out infinite;
+  }
+
   /* Subtle lift on cards — kept small so a dense list doesn't wobble */
   .hover-lift {
     transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
