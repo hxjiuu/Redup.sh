@@ -11,7 +11,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql)](https://www.postgresql.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-[官网 / Website](https://redup.sh) · [部署指引 / Deploy Guide](DEPLOY.md)
+[官网 / Website](https://redup.sh) · [Docker 部署](DEPLOY.md) · [手动部署](MANUAL_DEPLOY.md)
 
 </div>
 

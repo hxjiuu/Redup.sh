@@ -1,8 +1,11 @@
-# Deployment
+# Deployment — Docker Compose
 
 Single-host Docker Compose deployment. Puts Postgres, Redis, the Go
 backend, and the Next.js frontend on one machine behind a reverse proxy
 of your choice (nginx / Caddy / Cloudflare Tunnel).
+
+> 如需不使用 Docker 的裸机部署（systemd + 源码构建），见
+> [`MANUAL_DEPLOY.md`](MANUAL_DEPLOY.md)。
 
 ## Prerequisites
 
